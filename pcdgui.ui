@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1568</width>
+    <height>1230</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Test GUI</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>1551</width>
+     <height>1221</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="tab_seg">
+    <attribute name="title">
+     <string>Seg</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_origin"/>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>110</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_semseg"/>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>640</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_gt"/>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>640</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_insseg"/>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>50</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Origin </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>50</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>580</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Instance GT</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>580</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Instance Seg</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_next">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>1090</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Next</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_previous">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>1090</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Previous</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_pcdnum">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>1090</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>0/0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_pointnum">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>1110</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Points Num:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_pcdname">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>1080</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Point Cloud Name:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>250</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg Acc:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>340</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg mIou:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>860</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Instance Seg mIou:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>770</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Instance Seg Acc:</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widget_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>1100</x>
+       <y>10</y>
+       <width>431</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Dataset Path:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_datasetname">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>0</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_dataset_select">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>0</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_colorsetting">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>411</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>label-color setting</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_weakly_seg">
+    <attribute name="title">
+     <string>Weakly Seg</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>640</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_semseg_sup2"/>
+    </widget>
+    <widget class="QPushButton" name="pushButton_previous_weakly">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>1090</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Previous</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_pcdnum_weakly">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>1090</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>0/0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_origin_weakly"/>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>50</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_pointnum_weakly">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>1110</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Points Num:</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>640</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_gt_weakly"/>
+    </widget>
+    <widget class="QLabel" name="label_pcdname_weakly">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>1080</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Point Cloud Name:</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget_8">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>110</y>
+       <width>481</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_semseg_sup1"/>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>580</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>580</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>GT</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>50</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Agency FB</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Origin </string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_next_weakly">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>1090</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Next</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>770</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 2 Acc:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>340</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 1 mIou:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>860</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 2 mIou:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>250</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Semantic Seg 1 Acc:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_backbone1">
+     <property name="geometry">
+      <rect>
+       <x>1220</x>
+       <y>160</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_backbone1_select">
+     <property name="geometry">
+      <rect>
+       <x>1430</x>
+       <y>160</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>160</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Backbone:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_backbone2">
+     <property name="geometry">
+      <rect>
+       <x>1220</x>
+       <y>690</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_backbone2_select">
+     <property name="geometry">
+      <rect>
+       <x>1430</x>
+       <y>690</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>1120</x>
+       <y>690</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Backbone:</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>1100</x>
+       <y>10</y>
+       <width>431</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Dataset Path:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_datasetname_weakly">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>0</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+      </property>
+      <property name="text">
+       <string>None</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_datasetweakly_select">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>0</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_colorsetting_weakly">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>411</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>label-color setting</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
