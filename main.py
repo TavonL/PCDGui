@@ -13,33 +13,46 @@ import numpy as np
 
 
 class MyWindow(QtWidgets.QMainWindow, Ui_Form):
+    def weakly_visualize(self,source,mode='init'):
+
+        if mode!='init':
+            self.ren_origin_weakly.RemoveActor(self.actor_origin_weakly.actor)
+            self.ren_gt_weakly.RemoveActor(self.actor_gt_weakly.actor)
+            self.ren_sup1.RemoveActor(self.actor_sup1.actor)
+            self.ren_sup2.RemoveActor(self.actor_sup2.actor)
+        self.actor_origin_weakly = PcdToVtkActor(source)
+        self.actor_gt_weakly = PcdToVtkActor(source)
+        self.actor_sup1 = PcdToVtkActor(source)
+        self.actor_sup2 = PcdToVtkActor(source)
+        self.actor_origin_weakly.setting_color()
+        self.actor_gt_weakly.setting_color(mode='sem')
+        self.actor_sup1.setting_color(mode='sem')
+        self.actor_sup2.setting_color(mode='sem')
+        self.ren_origin_weakly.AddActor(self.actor_origin_weakly.actor)
+        self.ren_gt_weakly.AddActor(self.actor_gt_weakly.actor)
+        self.ren_sup1.AddActor(self.actor_sup1.actor)
+        self.ren_sup2.AddActor(self.actor_sup2.actor)
+        self.ren_origin_weakly.ResetCamera()
+        self.ren_gt_weakly.ResetCamera()
+        self.ren_sup1.ResetCamera()
+        self.ren_sup2.ResetCamera()
+        self.iren_origin_weakly.Initialize()
+        self.iren_gt_weakly.Initialize()
+        self.iren_sup1.Initialize()
+        self.iren_sup2.Initialize()
+
     def changeProgressBar_weakly(self,value):
         self.loadingbar.setValue(value)
         if value==100:
             self.sources_weakly = self.workthread.get_sources()
-            actor_origin=PcdToVtkActor(self.sources_weakly[0])
-            actor_gt=PcdToVtkActor(self.sources_weakly[0])
-            actor_sup1=PcdToVtkActor(self.sources_weakly[0])
-            actor_sup2=PcdToVtkActor(self.sources_weakly[0])
-            actor_origin.setting_color()
-            actor_gt.setting_color(mode='sem')
-            actor_sup1.setting_color(mode='sem')
-            actor_sup2.setting_color(mode='sem')
-            self.ren_origin_weakly.AddActor(actor_origin.actor)
-            self.ren_gt_weakly.AddActor(actor_gt.actor)
-            self.ren_sup1.AddActor(actor_sup1.actor)
-            self.ren_sup2.AddActor(actor_sup2.actor)
-            self.ren_origin_weakly.ResetCamera()
-            self.ren_gt_weakly.ResetCamera()
-            self.ren_sup1.ResetCamera()
-            self.ren_sup2.ResetCamera()
-            self.iren_origin_weakly.Initialize()
-            self.iren_gt_weakly.Initialize()
-            self.iren_sup1.Initialize()
-            self.iren_sup2.Initialize()
+            self.weakly_visualize(self.sources_weakly[0])
+            if len(self.sources_weakly)>1:
+                self.pushButton_next_weakly.setEnabled(True)
+            #self.pushButton_previous_weakly.setEnabled(True)
             self.label_pcdnum_weakly.setText(str(1)+'/'+str(len(self.sources_weakly)))
             self.label_pcdname_weakly.setText('Point Cloud Name:'+self.sources_weakly[0].pcd_name)
             self.label_pointnum_weakly.setText('Points Num:'+str(self.sources_weakly[0].points_num))
+
 
 
     def dataset_select(self):
@@ -57,15 +70,39 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.loadingbar.setRange(0,100)
         self.loadingbar.setValue(0)
         self.loadingbar.setMinimumDuration(1000)
-        self.loadingbar.setWindowTitle('Loading Point Cloud')
+        self.loadingbar.setWindowTitle('加载提示')
+        self.loadingbar.setLabelText('Loading Point Cloud')
         self.loadingbar.setCancelButtonText(None)
         self.loadingbar.setWindowFlags(QtCore.Qt.CustomizeWindowHint | QtCore.Qt.WindowMinimizeButtonHint)
         self.workthread=DatasetLoadingThread(folder)
         self.workthread._signal.connect(self.changeProgressBar_weakly)
         self.workthread.start()
     def next_weakly(self):
+        #默认逻辑正确的情况下都是允许next
+        idx,total=(self.label_pcdnum_weakly.text()).split('/')
+        idx=str(int(idx)+1)
+        if int(idx)>=int(total):
+            self.pushButton_next_weakly.setEnabled(False)
+        if int(idx)>1:
+            self.pushButton_previous_weakly.setEnabled(True)
+        self.weakly_visualize(self.sources_weakly[int(idx)-1],mode='update')
+        self.label_pcdnum_weakly.setText(idx + '/' + total)
+        self.label_pcdname_weakly.setText('Point Cloud Name:' + self.sources_weakly[int(idx)-1].pcd_name)
+        self.label_pointnum_weakly.setText('Points Num:' + str(self.sources_weakly[int(idx)-1].points_num))
+
         pass
     def previous_weakly(self):
+        # 默认逻辑正确的情况下都是允许previous
+        idx, total = (self.label_pcdnum_weakly.text()).split('/')
+        idx = str(int(idx)-1)
+        if int(idx) < int(total):
+            self.pushButton_next_weakly.setEnabled(True)
+        if int(idx) <=1:
+            self.pushButton_previous_weakly.setEnabled(False)
+        self.weakly_visualize(self.sources_weakly[int(idx) - 1],mode='update')
+        self.label_pcdnum_weakly.setText(idx + '/' + total)
+        self.label_pcdname_weakly.setText('Point Cloud Name:' + self.sources_weakly[int(idx) - 1].pcd_name)
+        self.label_pointnum_weakly.setText('Points Num:' + str(self.sources_weakly[int(idx) - 1].points_num))
         pass
 
 
@@ -74,6 +111,7 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super(MyWindow, self).__init__()
         self.setupUi(self)
+
         self.pushButton_dataset_select.clicked.connect(self.dataset_select)
         self.pushButton_datasetweakly_select.clicked.connect(self.dataset_select_weakly)
         self.pushButton_previous_weakly.clicked.connect(self.previous_weakly)
@@ -82,6 +120,14 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.pushButton_next.setEnabled(False)
         self.pushButton_next_weakly.setEnabled(False)
         self.pushButton_previous_weakly.setEnabled(False)
+
+        self.sources_weakly=None
+        self.sources=None
+        self.actor_origin_weakly = None
+        self.actor_gt_weakly = None
+        self.actor_sup1 = None
+        self.actor_sup2 = None
+
 
 
         self.frame_origin = QtWidgets.QFrame()
