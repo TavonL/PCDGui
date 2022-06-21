@@ -9,6 +9,6 @@ main.py运行后在当前weakly seg标签页下，右上角点击select按钮，
 
 * 默认在windows平台上运行 如需在linux平台上运行 请修改对应路径的代码
 * main.py 第54行 注释掉
-* pcd_to_vtk.py 第62行 ‘\\’换成'/'
-* pcd_thread.py 第35行‘\\’换成'/'
+* pcd_to_vtk.py 第62行 ‘\\\’换成'/'
+* pcd_thread.py 第35行‘\\\’换成'/'
 （可能还有其他需要修改）
