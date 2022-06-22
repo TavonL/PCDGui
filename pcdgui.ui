@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab_seg">
     <attribute name="title">
@@ -187,7 +187,7 @@
       <rect>
        <x>30</x>
        <y>1110</y>
-       <width>181</width>
+       <width>271</width>
        <height>31</height>
       </rect>
      </property>
@@ -203,7 +203,7 @@
       <rect>
        <x>30</x>
        <y>1080</y>
-       <width>181</width>
+       <width>271</width>
        <height>31</height>
       </rect>
      </property>
@@ -346,6 +346,19 @@
       </property>
      </widget>
     </widget>
+    <widget class="QPushButton" name="pushButton_loading">
+     <property name="geometry">
+      <rect>
+       <x>1110</x>
+       <y>970</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Loading</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_weakly_seg">
     <attribute name="title">
@@ -426,7 +439,7 @@
       <rect>
        <x>30</x>
        <y>1110</y>
-       <width>181</width>
+       <width>271</width>
        <height>31</height>
       </rect>
      </property>
@@ -453,7 +466,7 @@
       <rect>
        <x>30</x>
        <y>1080</y>
-       <width>181</width>
+       <width>271</width>
        <height>31</height>
       </rect>
      </property>
@@ -766,6 +779,19 @@
        <string>label-color setting</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_loading_weakly">
+     <property name="geometry">
+      <rect>
+       <x>1110</x>
+       <y>970</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Loading</string>
+     </property>
     </widget>
    </widget>
   </widget>

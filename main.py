@@ -48,10 +48,19 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
             self.weakly_visualize(self.sources_weakly[0])
             if len(self.sources_weakly)>1:
                 self.pushButton_next_weakly.setEnabled(True)
-            #self.pushButton_previous_weakly.setEnabled(True)
             self.label_pcdnum_weakly.setText(str(1)+'/'+str(len(self.sources_weakly)))
             self.label_pcdname_weakly.setText('Point Cloud Name:'+self.sources_weakly[0].pcd_name)
             self.label_pointnum_weakly.setText('Points Num:'+str(self.sources_weakly[0].points_num))
+    def changeProgressBar(self,value):
+        self.loadingbar.setValue(value)
+        if value == 100:
+            self.sources_weakly = self.workthread.get_sources()
+            self.weakly_visualize(self.sources_weakly[0])
+            if len(self.sources_weakly) > 1:
+                self.pushButton_next_weakly.setEnabled(True)
+            self.label_pcdnum_weakly.setText(str(1) + '/' + str(len(self.sources_weakly)))
+            self.label_pcdname_weakly.setText('Point Cloud Name:' + self.sources_weakly[0].pcd_name)
+            self.label_pointnum_weakly.setText('Points Num:' + str(self.sources_weakly[0].points_num))
 
 
 
@@ -65,18 +74,25 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
             return
         self.label_datasetname_weakly.setText(folder)
         folder=folder.replace('/','\\')
-        self.loadingbar=QtWidgets.QProgressDialog()
+
+    def loading_weakly(self):
+        pass
+    def loading(self):
+        folder=self.label_datasetname.text()
+        folder = folder.replace('/', '\\')
+        self.loadingbar = QtWidgets.QProgressDialog()
         self.loadingbar.setGeometry(QtCore.QRect(1000, 580, 800, 300))
-        self.loadingbar.setRange(0,100)
+        self.loadingbar.setRange(0, 100)
         self.loadingbar.setValue(0)
         self.loadingbar.setMinimumDuration(1000)
         self.loadingbar.setWindowTitle('加载提示')
         self.loadingbar.setLabelText('Loading Point Cloud')
         self.loadingbar.setCancelButtonText(None)
         self.loadingbar.setWindowFlags(QtCore.Qt.CustomizeWindowHint | QtCore.Qt.WindowMinimizeButtonHint)
-        self.workthread=DatasetLoadingThread(folder)
-        self.workthread._signal.connect(self.changeProgressBar_weakly)
+        self.workthread = DatasetLoadingThread(folder)
+        self.workthread._signal.connect(self.changeProgressBar)
         self.workthread.start()
+        pass
     def next_weakly(self):
         #默认逻辑正确的情况下都是允许next
         idx,total=(self.label_pcdnum_weakly.text()).split('/')
@@ -89,8 +105,30 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.label_pcdnum_weakly.setText(idx + '/' + total)
         self.label_pcdname_weakly.setText('Point Cloud Name:' + self.sources_weakly[int(idx)-1].pcd_name)
         self.label_pointnum_weakly.setText('Points Num:' + str(self.sources_weakly[int(idx)-1].points_num))
-
-        pass
+    def next(self):
+        # 默认逻辑正确的情况下都是允许next
+        idx, total = (self.label_pcdnum_weakly.text()).split('/')
+        idx = str(int(idx) + 1)
+        if int(idx) >= int(total):
+            self.pushButton_next.setEnabled(False)
+        if int(idx) > 1:
+            self.pushButton_previous.setEnabled(True)
+        self.weakly_visualize(self.sources_weakly[int(idx) - 1], mode='update')
+        self.label_pcdnum.setText(idx + '/' + total)
+        self.label_pcdname.setText('Point Cloud Name:' + self.sources[int(idx) - 1].pcd_name)
+        self.label_pointnum.setText('Points Num:' + str(self.sources[int(idx) - 1].points_num))
+    def previous(self):
+        # 默认逻辑正确的情况下都是允许previous
+        idx, total = (self.label_pcdnum_weakly.text()).split('/')
+        idx = str(int(idx) - 1)
+        if int(idx) < int(total):
+            self.pushButton_next.setEnabled(True)
+        if int(idx) <= 1:
+            self.pushButton_previous.setEnabled(False)
+        self.weakly_visualize(self.sources[int(idx) - 1], mode='update')
+        self.label_pcdnum.setText(idx + '/' + total)
+        self.label_pcdname.setText('Point Cloud Name:' + self.sources[int(idx) - 1].pcd_name)
+        self.label_pointnum.setText('Points Num:' + str(self.sources[int(idx) - 1].points_num))
     def previous_weakly(self):
         # 默认逻辑正确的情况下都是允许previous
         idx, total = (self.label_pcdnum_weakly.text()).split('/')
@@ -103,7 +141,6 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.label_pcdnum_weakly.setText(idx + '/' + total)
         self.label_pcdname_weakly.setText('Point Cloud Name:' + self.sources_weakly[int(idx) - 1].pcd_name)
         self.label_pointnum_weakly.setText('Points Num:' + str(self.sources_weakly[int(idx) - 1].points_num))
-        pass
 
 
 
@@ -120,6 +157,12 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.pushButton_next.setEnabled(False)
         self.pushButton_next_weakly.setEnabled(False)
         self.pushButton_previous_weakly.setEnabled(False)
+        self.pushButton_colorsetting.setEnabled(False)
+        self.pushButton_colorsetting_weakly.setEnabled(False)
+        self.pushButton_backbone1_select.setEnabled(False)
+        self.pushButton_backbone2_select.setEnabled(False)
+        self.pushButton_loading.setEnabled(False)
+        self.pushButton_loading_weakly.setEnabled(False)
 
         self.sources_weakly=None
         self.sources=None
@@ -127,6 +170,10 @@ class MyWindow(QtWidgets.QMainWindow, Ui_Form):
         self.actor_gt_weakly = None
         self.actor_sup1 = None
         self.actor_sup2 = None
+        self.actor_origin =None
+        self.actor_sem=None
+        self.actor_ins=None
+        self.actor_ins_gt=None
 
 
 

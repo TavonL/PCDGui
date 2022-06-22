@@ -51,9 +51,17 @@ class PcdToVtkSource():
         np_class = np.array(plydata['vertex']['class'])
         np_instance = np.array(plydata['vertex']['instance'])
         return np_points, np_color, np_class, np_instance
-    def __init__(self,datapath):
+    def __init__(self,datapath=None,mode='origin'):
         super(PcdToVtkSource,self).__init__()
-        np_points, np_color, np_class, np_instance=self.read_pcd_ply(datapath)
+        if mode=='origin':
+            np_points, np_color, np_class, np_instance=self.read_pcd_ply(datapath)
+        elif mode=='ins':
+            #调用接口运行ins seg模型
+            pass
+        else:
+            #弱监督分割要根据不同的模型，大坑
+            #输入 datapath 输出 全监督的模型内容 弱监督的模型内容
+            pass
         vtk_points = vtkPoints()
         vtk_points.SetData(numpy_to_vtk(np_points))
         self.source = vtkPolyData()
