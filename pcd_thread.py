@@ -32,7 +32,7 @@ class DatasetLoadingThread(QtCore.QThread):
         i=0
         max=len(file_name_list)
         for f in file_name_list:
-            self.sources.append(PcdToVtkSource(self.dataset_path+'\\'+f))
+            self.sources.append(PcdToVtkSource(self.dataset_path+'\\'+f,mode='sem'))
             i=i+1
             self._signal.emit(i*100/max)
             if i==5:

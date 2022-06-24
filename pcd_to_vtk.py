@@ -51,6 +51,12 @@ class PcdToVtkSource():
         np_class = np.array(plydata['vertex']['class'])
         np_instance = np.array(plydata['vertex']['instance'])
         return np_points, np_color, np_class, np_instance
+    def read_pcd_npz(self,datapath):
+        data=np.load(datapath)
+        np_points=data['coord']
+        np_color=data['color']/2+0.5#(0-1)
+        np_class=data['gt_sem']
+        return np_points, np_color, np_class
     def __init__(self,datapath=None,mode='origin'):
         super(PcdToVtkSource,self).__init__()
         if mode=='origin':
@@ -61,7 +67,7 @@ class PcdToVtkSource():
         else:
             #弱监督分割要根据不同的模型，大坑
             #输入 datapath 输出 全监督的模型内容 弱监督的模型内容
-            pass
+            np_points, np_color, np_class = self.read_pcd_npz(datapath)
         vtk_points = vtkPoints()
         vtk_points.SetData(numpy_to_vtk(np_points))
         self.source = vtkPolyData()
@@ -81,17 +87,21 @@ class PcdToVtkSource():
         vtk_class=numpy_to_vtk(np_class,array_type=VTK_INT)
         vtk_class.SetName('class')
 
-        vtk_instance=numpy_to_vtk(np_instance,array_type=VTK_INT)
-        vtk_instance.SetName('instance')
-
         self.source.GetCellData().AddArray(vtk_color)
         self.source.GetCellData().AddArray(vtk_class)
-        self.source.GetCellData().AddArray(vtk_instance)
+
         self.source.GetCellData().SetActiveScalars('color')
         self.source.GetCellData().SetActiveScalars('class')
-        self.source.GetCellData().SetActiveScalars('instance')
+        if mode=='ins':
+            vtk_instance=numpy_to_vtk(np_instance,array_type=VTK_INT)
+            vtk_instance.SetName('instance')
+            self.source.GetCellData().AddArray(vtk_instance)
+            self.source.GetCellData().SetActiveScalars('instance')
+
+
+
 class PcdToVtkActor():
-    def __init__(self,vtk_data):
+    def __init__(self,vtk_data,mode='origin'):
         super(PcdToVtkActor,self).__init__()
         self.data=vtk_data.source
         self.mapper=vtkPolyDataMapper()
@@ -100,6 +110,8 @@ class PcdToVtkActor():
         self.actor.SetMapper(self.mapper)
         self.lut=vtkLookupTable()
         self.mapper.SetLookupTable(self.lut)
+        self.mode=mode
+        self.setting_color()
 
     def setting_lut(self,color_nums=20):
         self.lut.SetNumberOfColors(color_nums)
@@ -112,13 +124,13 @@ class PcdToVtkActor():
         self.lut.Build()
 
         pass
-    def setting_color(self,mode='origin',input_colors=None):
-        if mode=='origin':
+    def setting_color(self,input_colors=None):
+        if self.mode=='origin':
             self.mapper.ScalarVisibilityOn()
             self.mapper.SetColorModeToDirectScalars()
             self.mapper.SetScalarModeToUseCellFieldData()
             self.mapper.SelectColorArray('color')
-        elif mode=='sem':
+        elif self.mode=='sem':
             self.mapper.ScalarVisibilityOn()
             self.mapper.SetColorModeToMapScalars()
             self.mapper.SetScalarModeToUseCellFieldData()
