@@ -21,10 +21,11 @@ from vtkmodules.vtkRenderingCore import (
 )
 class DatasetLoadingThread(QtCore.QThread):
     _signal=QtCore.pyqtSignal(int)
-    def __init__(self,dataset_path):
+    def __init__(self,dataset_path,mode="ins"):
         super(DatasetLoadingThread,self).__init__()
         self.dataset_path=dataset_path
         self.sources=[]
+        self.mode=mode
     def get_sources(self):
         return self.sources
     def run(self):
@@ -32,11 +33,11 @@ class DatasetLoadingThread(QtCore.QThread):
         i=0
         max=len(file_name_list)
         for f in file_name_list:
-            self.sources.append(PcdToVtkSource(self.dataset_path+'\\'+f,mode='sem'))
+            self.sources.append(PcdToVtkSource(self.dataset_path+'\\'+f,mode=self.mode))
             i=i+1
             self._signal.emit(i*100/max)
-            if i==5:
-                self._signal.emit(100)
-                return
+            #if i==5:
+                #self._signal.emit(100)
+                #return
 
 

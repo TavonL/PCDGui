@@ -214,12 +214,12 @@
       <string>Point Cloud Name:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_13">
+    <widget class="QLabel" name="label_sem_acc">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>250</y>
-       <width>151</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -230,12 +230,12 @@
       <string>Semantic Seg Acc:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_14">
+    <widget class="QLabel" name="label_sem_miou">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>340</y>
-       <width>161</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -246,28 +246,12 @@
       <string>Semantic Seg mIou:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_15">
-     <property name="geometry">
-      <rect>
-       <x>1120</x>
-       <y>860</y>
-       <width>161</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Instance Seg mIou:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_16">
+    <widget class="QLabel" name="label_ins_APs">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>770</y>
-       <width>151</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -275,7 +259,7 @@
       <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
      </property>
      <property name="text">
-      <string>Instance Seg Acc:</string>
+      <string>Instance Seg APs:</string>
      </property>
     </widget>
     <widget class="QWidget" name="widget_2" native="true">
@@ -558,12 +542,12 @@
       <string>Next</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_17">
+    <widget class="QLabel" name="label_sem_acc_2">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>770</y>
-       <width>151</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -574,12 +558,12 @@
       <string>Semantic Seg 2 Acc:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_18">
+    <widget class="QLabel" name="label_sem_miou_1">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>340</y>
-       <width>161</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -590,12 +574,12 @@
       <string>Semantic Seg 1 mIou:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_19">
+    <widget class="QLabel" name="label_sem_miou_2">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>860</y>
-       <width>161</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -606,12 +590,12 @@
       <string>Semantic Seg 2 mIou:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_20">
+    <widget class="QLabel" name="label_sem_acc_1">
      <property name="geometry">
       <rect>
        <x>1120</x>
        <y>250</y>
-       <width>151</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
